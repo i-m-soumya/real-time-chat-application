@@ -1,12 +1,10 @@
 import { Router } from 'express';
+import { registerUser, loginUser } from '../controllers/users';
 
 const usersRouter = Router();
 
-usersRouter.get('/signin', (request, response) => {
-  return response.json("Login");
-});
-usersRouter.get('/signup', (request, response) => {
-  return response.json("Sign Up");
-});
+usersRouter.post('/register', registerUser);
+usersRouter.post('/login', loginUser);
+
 
 export default usersRouter;
