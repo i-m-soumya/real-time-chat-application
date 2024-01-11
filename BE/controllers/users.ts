@@ -70,7 +70,7 @@ export const searchUser = async (req: Request, res: Response) => {
   console.log(req.body)
   res.json({
     status: 200,
-    message: "logged in!",
+    message: "!",
     data: {}
   })
   return
