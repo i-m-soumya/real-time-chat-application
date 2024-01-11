@@ -14,6 +14,6 @@ app.use(express.json());
 app.use(routes);
 
 app.listen(port, async () => {
-  await connectDB("mongodb://0.0.0.0:27017/real-time-messaging");
+  await connectDB();
   return console.log(`Express is listening at http://localhost:${port}`);
 });
