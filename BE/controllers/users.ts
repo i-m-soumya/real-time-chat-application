@@ -31,6 +31,25 @@ export const registerUser = async (req: Request, res: Response) => {
 };
 
 export const loginUser = async (req: Request, res: Response) => {
-  console.log(req);
-  res.send({ user: "user._id" });
+  const { email, password } = req.body;
+  const user = await User.findOne({ email: email })
+  if (!user) {
+    res.json({
+      status: 403,
+      message: "User does not exits!",
+    });
+    return;
+  }
+  if (user.password && user.password != password) {
+    res.json({
+      status: 403,
+      message: "Wrong Password!",
+    });
+    return;
+  }
+  res.json({
+    status: 200,
+    message: "logged in!",
+  });
+  return;
 };
