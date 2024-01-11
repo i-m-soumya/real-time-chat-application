@@ -1,29 +1,29 @@
-import jwt, { JwtPayload } from 'jsonwebtoken';
-import { Request, Response, NextFunction } from 'express';
+import jwt, { JwtPayload } from 'jsonwebtoken'
+import { Request, Response, NextFunction } from 'express'
 
 
 export interface CustomRequest extends Request {
- token: string | JwtPayload;
+ token: string | JwtPayload
 }
 
 export const auth = async (req: Request, res: Response, next: NextFunction) => {
-const secretKey = process.env.JWT_SECRET_KEY;
+const secretKey = process.env.JWT_SECRET_KEY
  try {
-   const token = req.header('Authorization')?.replace('Bearer ', '');
+   const token = req.header('Authorization')?.replace('Bearer ', '')
 
    if (!token) {
-     throw new Error();
+     throw new Error()
    }
 
    console.log(token, secretKey)
-     const decoded = jwt.verify(token, secretKey);
-   (req as CustomRequest).token = decoded;
+   const decoded = jwt.verify(token, secretKey);
+   (req as CustomRequest).token = decoded
 
-   next();
+   next()
  } catch (err) {
     res.json({
         status: 401,
         message: "Please Authenticate!",
       }).send()
  }
-};
+}

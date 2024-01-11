@@ -36,14 +36,14 @@ export const loginUser = async (req: Request, res: Response) => {
   const user = await User.findOne({ email: email })
   if (!user) {
     res.json({
-      status: 403,
+      status: 401,
       message: "User does not exits!",
     })
     return
   }
   if (user.password && user.password != password) {
     res.json({
-      status: 403,
+      status: 401,
       message: "Wrong Password!",
     })
     return
@@ -63,6 +63,15 @@ export const loginUser = async (req: Request, res: Response) => {
     data: {
       token: token
     }
+  })
+  return
+}
+export const searchUser = async (req: Request, res: Response) => { 
+  console.log(req.body)
+  res.json({
+    status: 200,
+    message: "logged in!",
+    data: {}
   })
   return
 }
