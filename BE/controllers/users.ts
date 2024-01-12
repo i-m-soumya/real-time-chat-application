@@ -67,7 +67,7 @@ export const loginUser = async (req: Request, res: Response) => {
   return
 }
 export const searchUser = async (req: Request, res: Response) => { 
-  console.log(req.body)
+  console.log(req.body.searchParams)
   res.json({
     status: 200,
     message: "!",
