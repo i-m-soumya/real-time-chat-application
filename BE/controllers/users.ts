@@ -50,10 +50,10 @@ export const loginUser = async (req: Request, res: Response) => {
   }
   const jwtSecretKey = process.env.JWT_SECRET_KEY
   const data = {
-      time: Date(),
-      userId: user.id,
-      userName: user.name,
-      userEmail: user.email
+    time: Date(),
+    userId: user.id,
+    userName: user.name,
+    userEmail: user.email
   }
 
   const token = jwt.sign(data, jwtSecretKey)
@@ -66,12 +66,15 @@ export const loginUser = async (req: Request, res: Response) => {
   })
   return
 }
-export const searchUser = async (req: Request, res: Response) => { 
-  console.log(req.body.searchParams)
+export const searchUser = async (req: Request, res: Response) => {
+  const searchParams = req.body.searchParams
+  const users = await User.find({ "$or": [{ "email": { "$regex": searchParams, "$options": "i" } }, { "name": { "$regex": searchParams, "$options": "i" } }] })
   res.json({
     status: 200,
     message: "!",
-    data: {}
+    data: {
+      users: users
+    }
   })
   return
 }
