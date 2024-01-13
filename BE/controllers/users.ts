@@ -56,7 +56,7 @@ export const loginUser = async (req: Request, res: Response) => {
     userEmail: user.email
   }
 
-  const token = jwt.sign(data, jwtSecretKey)
+  const token = jwt.sign(data, jwtSecretKey, { expiresIn: '12h' })
   res.json({
     status: 200,
     message: "logged in!",
